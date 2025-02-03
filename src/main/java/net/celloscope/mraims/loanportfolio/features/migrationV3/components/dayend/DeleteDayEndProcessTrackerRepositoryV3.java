@@ -1,0 +1,8 @@
+package net.celloscope.mraims.loanportfolio.features.migrationV3.components.dayend;
+
+import net.celloscope.mraims.loanportfolio.features.dayendprocess.adapter.out.entity.DayEndProcessTrackerEntity;
+import net.celloscope.mraims.loanportfolio.features.migrationV3.deleteofficedata.DeleteDataByManagementProcessIdRepositoryV3;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+
+public interface DeleteDayEndProcessTrackerRepositoryV3 extends ReactiveCrudRepository<DayEndProcessTrackerEntity, String>, DeleteDataByManagementProcessIdRepositoryV3<DayEndProcessTrackerEntity, String> {
+}

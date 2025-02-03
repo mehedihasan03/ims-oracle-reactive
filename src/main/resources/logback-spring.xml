@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property scope="context" name="COLORIZER_COLORS" value="boldred@,boldyellow@,boldgreen@,boldcyan@,boldblue@" />
+	<conversionRule conversionWord="colorize" converterClass="org.tuxdude.logback.extensions.LogColorizer" />
+
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<withJansi>true</withJansi>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%colorize(%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [ %X{spanId:-}, %X{traceId:-}, %X{Method} %X{Uri}] [Request-Trace-Id: %X{Request-Trace-Id:-}] %-5level %logger:%L - %msg%n)</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+		<file>log/07-loan-api.log</file>
+		<prudent>false</prudent>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/archived/07-loan/07-loan-api__%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+		</rollingPolicy>
+		<encoder>
+			<charset>UTF-8</charset>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [ %X{spanId:-}, %X{traceId:-}, %X{Method} %X{Uri}] [Request-Trace-Id: %X{Request-Trace-Id:-}] %-5level %logger{36}:%L - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+
+	<root level="DEBUG">
+		<appender-ref ref="console" />
+		<appender-ref ref="file" />
+	</root>
+	<logger name="org.springframework" level="WARN"/>
+	<logger name="reactor" level="WARN"/>
+	<logger name="org.springdoc" level="WARN"/>
+	<logger name="_org.springframework" level="WARN"/>
+	<logger name="io" level="WARN"/>
+</configuration>

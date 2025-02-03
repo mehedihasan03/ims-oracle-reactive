@@ -1,0 +1,74 @@
+[
+    {
+      "oid" : "uuid-1",
+      "installNo" : 1,
+      "installDate" : "2023-06-04",
+      "prinPaid" : 590.00,
+      "serviceChargePaid" : 160.00,
+      "prinRemainForThisInst" : 0.00,
+      "scRemainForThisInst" : 0.00
+    },
+    {
+      "oid" : "uuid-2",
+      "installNo" : 2,
+      "installDate" : "2023-06-11",
+      "prinPaid" : 593.15,
+      "serviceChargePaid" : 156.85,
+      "prinRemainForThisInst" : 0.00,
+      "scRemainForThisInst" : 0.00
+    },
+    {
+      "oid" : "uuid-3",
+      "installNo" : 3,
+      "installDate" : "2023-06-18",
+      "prinPaid" : 0.00,
+      "serviceChargePaid" : 140.00,
+      "prinRemainForThisInst" : 596.31,
+      "scRemainForThisInst" : 13.69
+    },
+    {
+      "oid" : "uuid-3",
+      "installNo" : 3,
+      "installDate" : "2023-06-18",
+      "prinPaid" : 386.31,
+      "serviceChargePaid" : 13.69,
+      "prinRemainForThisInst" : 210.00,
+      "scRemainForThisInst" : 0.00
+    },
+    {
+      "oid" : "uuid-3",
+      "installNo" : 3,
+      "installDate" : "2023-06-18",
+      "prinPaid" : 210.00,
+      "serviceChargePaid" : 0.00,
+      "prinRemainForThisInst" : 0.00,
+      "scRemainForThisInst" : 0.00
+    },
+    {
+      "oid" : "uuid-4",
+      "installNo" : 4,
+      "installDate" : "2023-06-25",
+      "prinPaid" : 599.49,
+      "serviceChargePaid" : 150.51,
+      "prinRemainForThisInst" : 0.00,
+      "scRemainForThisInst" : 0.00
+    },
+    {
+      "oid" : "uuid-5",
+      "installNo" : 5,
+      "installDate" : "2023-07-02",
+      "prinPaid" : 602.69,
+      "serviceChargePaid" : 147.31,
+      "prinRemainForThisInst" : 0.00,
+      "scRemainForThisInst" : 0.00
+    },
+    {
+      "oid" : "uuid-6",
+      "installNo" : 6,
+      "installDate" : "2023-07-09",
+      "prinPaid" : 105.90,
+      "serviceChargePaid" : 144.10,
+      "prinRemainForThisInst" : 500.00,
+      "scRemainForThisInst" : 0.00
+    }
+]

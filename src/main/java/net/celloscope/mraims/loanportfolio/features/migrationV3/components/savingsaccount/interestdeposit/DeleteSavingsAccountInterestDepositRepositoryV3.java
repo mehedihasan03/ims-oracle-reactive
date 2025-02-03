@@ -1,0 +1,10 @@
+package net.celloscope.mraims.loanportfolio.features.migrationV3.components.savingsaccount.interestdeposit;
+
+import net.celloscope.mraims.loanportfolio.features.migrationV3.deleteofficedata.DeleteDataByManagementProcessIdRepositoryV3;
+import net.celloscope.mraims.loanportfolio.features.savingsinterest.adapter.out.persistence.database.entity.SavingsAccountInterestDepositEntity;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface DeleteSavingsAccountInterestDepositRepositoryV3 extends ReactiveCrudRepository<SavingsAccountInterestDepositEntity, String>, DeleteDataByManagementProcessIdRepositoryV3<SavingsAccountInterestDepositEntity, String> {
+}

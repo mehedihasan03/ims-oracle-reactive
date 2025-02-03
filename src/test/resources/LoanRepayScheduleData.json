@@ -1,0 +1,122 @@
+[
+		{
+			"loanRepayScheduleId": "uuid-repay-1",
+			"installNo" : 1,
+			"installDate" : "2023-06-04",
+			"totalPayment" : 750.00,
+			"principal" : 590.00,
+			"serviceCharge" : 160.00,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-2",
+			"installNo" : 2,
+			"installDate" : "2023-06-11",
+			"totalPayment" : 750.00,
+			"principal" : 593.15,
+			"serviceCharge" : 156.85,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-3",
+			"installNo" : 3,
+			"installDate" : "2023-06-18",
+			"totalPayment" : 750.00,
+			"principal" : 596.31,
+			"serviceCharge" : 153.69,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-4",
+			"installNo" : 4,
+			"installDate" : "2023-06-25",
+			"totalPayment" : 750.00,
+			"principal" : 599.49,
+			"serviceCharge" : 150.51,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-5",
+			"installNo" : 5,
+			"installDate" : "2023-07-02",
+			"totalPayment" : 750.00,
+			"principal" : 602.69,
+			"serviceCharge" : 147.31,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-6",
+			"installNo" : 6,
+			"installDate" : "2023-07-09",
+			"totalPayment" : 750.00,
+			"principal" : 605.90,
+			"serviceCharge" : 144.10,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-7",
+			"installNo" : 7,
+			"installDate" : "2023-07-16",
+			"totalPayment" : 750.00,
+			"principal" : 609.13,
+			"serviceCharge" : 140.87,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-8",
+			"installNo" : 8,
+			"installDate" : "2023-07-23",
+			"totalPayment" : 750.00,
+			"principal" : 612.38,
+			"serviceCharge" : 137.62,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-9",
+			"installNo" : 9,
+			"installDate" : "2023-07-29",
+			"totalPayment" : 750.00,
+			"principal" : 615.65,
+			"serviceCharge" : 134.35,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		},
+		{
+			"loanRepayScheduleId": "uuid-repay-10",
+			"installNo" : 10,
+			"installDate" : "2023-08-05",
+			"totalPayment" : 750.00,
+			"principal" : 618.93,
+			"serviceCharge" : 131.07,
+			"penalty" : null,
+			"fees" : null,
+			"insurance" : null,
+			"status" : "pending"
+		}
+]

@@ -1,0 +1,7 @@
+package net.celloscope.mraims.loanportfolio.features.archive.adapter.out.persistence.repository;
+
+import net.celloscope.mraims.loanportfolio.features.dayforwardnew.adapter.out.persistence.entity.DayForwardProcessTrackerHistoryEntity;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+
+public interface IDayForwardProcessTrackerHistoryRepositoryDelete extends ReactiveCrudRepository<DayForwardProcessTrackerHistoryEntity, String>, DeleteArchiveDataBusiness<DayForwardProcessTrackerHistoryEntity,String> {
+}
