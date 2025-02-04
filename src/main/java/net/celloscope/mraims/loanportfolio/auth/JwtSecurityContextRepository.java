@@ -1,7 +1,9 @@
 package net.celloscope.mraims.loanportfolio.auth;
 
 import lombok.RequiredArgsConstructor;
+import net.celloscope.mraims.loanportfolio.core.util.exception.ExceptionHandlerUtil;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -19,7 +21,7 @@ public class JwtSecurityContextRepository implements ServerSecurityContextReposi
 
     @Override
     public Mono<Void> save(ServerWebExchange exchange, SecurityContext context) {
-        return Mono.empty(); // Not needed for stateless authentication
+        return Mono.empty();
     }
 
     @Override
@@ -27,7 +29,7 @@ public class JwtSecurityContextRepository implements ServerSecurityContextReposi
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            return Mono.empty();
+            return Mono.error(new ExceptionHandlerUtil(HttpStatus.UNAUTHORIZED, "Access Denied : Missing Authorization token in Request Headers"));
         }
 
         String token = authHeader.substring(7);
