@@ -18,7 +18,7 @@ public interface LoanAdjustmentRepository extends ReactiveCrudRepository<LoanAdj
     Flux<LoanAdjustmentDataEntity> findAllByManagementProcessIdAndSamityId(String managementProcessId, String samityId);
 
     @Query("""
-                SELECT DISTINCT samity_id FROM loan_adjustment_data csd WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
+            SELECT DISTINCT samity_id FROM template.loan_adjustment_data csd WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
             """)
     Flux<String> getSamityIdListLockedByUserForAuthorization(String lockedBy);
 
@@ -33,13 +33,13 @@ public interface LoanAdjustmentRepository extends ReactiveCrudRepository<LoanAdj
     Mono<Void> deleteAllByManagementProcessIdAndLoanAdjustmentProcessId(String managementProcessId, String loanAdjustmentProcessId);
 
     @Query("""
-            SELECT * FROM loan_adjustment_data WHERE management_process_id = :managementProcessId and loan_account_id is not null and case when (:loginId is not null and :loginId != '') then (created_by = :loginId) else 1 = 1 end LIMIT :limit OFFSET :offset;
+            SELECT * FROM template.loan_adjustment_data WHERE management_process_id = :managementProcessId and loan_account_id is not null and case when (:loginId is not null and :loginId != '') then (created_by = :loginId) else 1 = 1 end LIMIT :limit OFFSET :offset;
             """)
     Flux<LoanAdjustmentDataEntity> findAllByManagementProcessIdAndCreatedBy(String managementProcessId, String loginId, int limit, int offset);
 
 
     @Query("""
-            SELECT count(*) FROM loan_adjustment_data WHERE management_process_id = :managementProcessId and loan_account_id is not null and case when (:loginId is not null and :loginId != '') then (created_by = :loginId) else 1 = 1 end;
+            SELECT count(*) FROM template.loan_adjustment_data WHERE management_process_id = :managementProcessId and loan_account_id is not null and case when (:loginId is not null and :loginId != '') then (created_by = :loginId) else 1 = 1 end;
             """)
     Mono<Long> getCountLoanDataEntity(String managementProcessId, String loginId);
 

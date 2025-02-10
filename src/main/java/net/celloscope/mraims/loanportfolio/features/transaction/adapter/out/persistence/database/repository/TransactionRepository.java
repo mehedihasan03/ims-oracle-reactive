@@ -20,17 +20,17 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 	@Query("""
 			select X.*, Y.transaction_count, Y.transaction_amount from
 			    (select s.samity_id, count(msopm.*) as total_member
-			    from mem_smt_off_pri_map msopm
-				join samity s
+			    from template.mem_smt_off_pri_map msopm
+				join template.samity s
 				on s.samity_id = msopm.samity_id
 			    group by s.samity_id
 			    where msopm.status = 'Active') X
 			left join
 			    (select s.samity_id, count(t.*) as transaction_count, sum(t.amount) as transaction_amount
-			    from "transaction" t
-				join mem_smt_off_pri_map msopm
+			    from template."transaction" t
+				join template.mem_smt_off_pri_map msopm
 				on t.member_id = msopm.member_id
-				join samity s
+				join template.samity s
 				on s.samity_id = msopm.samity_id
 			    where t.transaction_date between :FROM_DATE and :TO_DATE
 			    and msopm.status = 'Active'
@@ -42,10 +42,10 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 	
 	@Query("""
 			select *
-			from "transaction" t
-			join mem_smt_off_pri_map msopm
+			from template."transaction" t
+			join template.mem_smt_off_pri_map msopm
 			on t.member_id = msopm.member_id
-			join samity s
+			join template.samity s
 			on s.samity_id = msopm.samity_id
 			where s.samity_id = :SAMITY_ID
 			and t.transaction_date between :FROM_DATE and :TO_DATE
@@ -69,19 +69,19 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 	
 	@Query("""
 			select *
-			from samity s
+			from template.samity s
 			where s.samity_id = :SAMITY_ID;
 			""")
 	Mono<Samity> getSamityForTransactionReport(@Param("SAMITY_ID") String samityId);
 	
 	@Query("""
-			    SELECT t.transaction_id FROM "transaction" t WHERE t.staging_data_id IN (:stagingDataIdList);
+			    SELECT t.transaction_id FROM template."transaction" t WHERE t.staging_data_id IN (:stagingDataIdList);
 			""")
 	Flux<String> findTransactionIdListByStagingDataIdList(List<String> stagingDataIdList);
 	
 	
 	@Query("""
-			    SELECT * FROM "transaction" t WHERE t.staging_data_id IN (:stagingDataIdList);
+			    SELECT * FROM template."transaction" t WHERE t.staging_data_id IN (:stagingDataIdList);
 			""")
 	Flux<TransactionEntity> findAllByStagingDataIdList(List<String> stagingDataIdList);
 

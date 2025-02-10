@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_process_tracker")
+@Table("template.staging_process_tracker")
 public class StagingDataGenerationStatusEntity extends BaseToString implements Persistable<String> {
 
     @Id

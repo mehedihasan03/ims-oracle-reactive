@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_account_data_edit_history")
+@Table("template.staging_account_data_edit_history")
 public class StagingAccountDataEditHistoryEntity extends BaseToString implements Persistable<String> {
 
     @Id

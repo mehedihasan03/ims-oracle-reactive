@@ -15,7 +15,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_process_tracker_edit_history")
+@Table("template.staging_process_tracker_edit_history")
 public class StagingProcessTrackerEditHistoryEntity implements Persistable<String> {
 
 

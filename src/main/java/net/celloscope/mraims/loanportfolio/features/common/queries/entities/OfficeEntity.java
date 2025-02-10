@@ -14,7 +14,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("office")
+@Table("template.office")
 public class OfficeEntity implements Persistable<String> {
 
     @Id

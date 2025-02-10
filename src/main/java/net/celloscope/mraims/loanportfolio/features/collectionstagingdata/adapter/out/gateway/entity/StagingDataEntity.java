@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table("staging_data")
+@Table("template.staging_data")
 public class StagingDataEntity {
     @Id
     private String oid;

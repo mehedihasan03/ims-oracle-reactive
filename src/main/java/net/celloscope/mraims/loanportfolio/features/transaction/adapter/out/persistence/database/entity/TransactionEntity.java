@@ -19,7 +19,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("transaction")
+@Table("template.transaction")
 public class TransactionEntity implements Persistable<String> {
     @Id
     private String oid;

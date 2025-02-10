@@ -24,10 +24,10 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
             e.emp_name_bn AS field_officer_name_bn,
             msopm.office_id
            FROM
-            samity s
-           INNER JOIN mem_smt_off_pri_map msopm ON
+            template.samity s
+           INNER JOIN template.mem_smt_off_pri_map msopm ON
             s.samity_id = msopm.samity_id
-           INNER JOIN employee e ON
+           INNER JOIN template.employee e ON
             s.field_officer_id = e.employee_id
            WHERE
             msopm.office_id = :officeId
@@ -40,7 +40,7 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
             SELECT
                 DISTINCT sd.total_member
             FROM
-                staging_data sd
+                template.staging_data sd
             WHERE
                 sd.samity_id = :samityId
             LIMIT 1;
@@ -64,12 +64,12 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
                 spt.process_start_time,
                 spt.process_end_time
             FROM
-                staging_process_tracker spt
-            INNER JOIN samity s ON
+                template.staging_process_tracker spt
+            INNER JOIN template.samity s ON
                 s.samity_id = spt.samity_id
-            INNER JOIN mem_smt_off_pri_map msopm ON
+            INNER JOIN template.mem_smt_off_pri_map msopm ON
                 s.samity_id = msopm.samity_id
-            INNER JOIN employee e ON
+            INNER JOIN template.employee e ON
                 s.field_officer_id = e.employee_id
             WHERE
                 msopm.office_id = :officeId
@@ -82,7 +82,7 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
             	SELECT DISTINCT
             		sd.staging_data_id
             	FROM
-            		staging_data sd
+            		template.staging_data sd
             	WHERE
             		sd.samity_id = :samityId
 	            AND sd.management_process_id = :managementProcessId;
@@ -95,7 +95,7 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
     SELECT DISTINCT
     count(msopm.member_id)
     FROM 
-    mem_smt_off_pri_map msopm
+    template.mem_smt_off_pri_map msopm
     WHERE
     msopm.samity_id = :samityId
     AND 
@@ -108,7 +108,7 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
                 msopm.samity_id,
                 count(*)
             FROM
-                mem_smt_off_pri_map msopm
+                template.mem_smt_off_pri_map msopm
             WHERE
                 msopm.office_id = :officeId
             AND 
@@ -124,9 +124,9 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
             SELECT DISTINCT
                 spt.samity_id
             FROM
-                mem_smt_off_pri_map msopm
+                template.mem_smt_off_pri_map msopm
             INNER JOIN 
-                staging_process_tracker spt 
+                template.staging_process_tracker spt 
             ON msopm.samity_id = spt.samity_id
             WHERE
                 msopm.office_id = :officeId

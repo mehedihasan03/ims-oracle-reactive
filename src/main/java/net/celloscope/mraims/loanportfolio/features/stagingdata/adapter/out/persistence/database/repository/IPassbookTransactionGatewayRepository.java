@@ -13,8 +13,8 @@ public interface IPassbookTransactionGatewayRepository extends ReactiveCrudRepos
 	    p.transaction_date AS last_deposit_date,
 	    t.collection_type AS last_deposit_type
 	  FROM
-	    passbook p
-	  INNER JOIN "transaction" t ON
+	    template.passbook p
+	  INNER JOIN template."transaction" t ON
 	    p.transaction_id = t.transaction_id
 	  WHERE
 	    p.savings_account_id = :savingsAccountId
@@ -33,8 +33,8 @@ public interface IPassbookTransactionGatewayRepository extends ReactiveCrudRepos
 	    p.transaction_date AS last_withdraw_date,
 	    t.withdraw_type AS last_withdraw_type
 	  FROM
-	    passbook p
-	  INNER JOIN "transaction" t ON
+	    template.passbook p
+	  INNER JOIN template."transaction" t ON
 	    p.transaction_id = t.transaction_id
 	  WHERE
 	    p.savings_account_id = :savingsAccountId
@@ -43,7 +43,7 @@ public interface IPassbookTransactionGatewayRepository extends ReactiveCrudRepos
 	    AND
 	    p.withdraw_amount::int != 0::int
 	  ORDER BY p.created_on DESC
-	  LIMIT 1;
+	  FETCH FIRST ROW ONLY;
 	""")
 	Mono<PassbookTransactionEntity> getLastPassbookEntryForWithdrawAmountWithSavingsAccount(String savingsAccountId);
 }

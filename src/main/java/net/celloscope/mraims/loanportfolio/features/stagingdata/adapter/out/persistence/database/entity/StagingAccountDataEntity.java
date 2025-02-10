@@ -20,7 +20,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_account_data")
+@Table("template.staging_account_data")
 public class StagingAccountDataEntity extends BaseToString implements Persistable<String> {
 
     @Id

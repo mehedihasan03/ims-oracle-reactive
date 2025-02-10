@@ -18,7 +18,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("passbook")
+@Table("template.passbook")
 public class PassbookTransactionEntity implements Persistable<String> {
 	
 	@Id

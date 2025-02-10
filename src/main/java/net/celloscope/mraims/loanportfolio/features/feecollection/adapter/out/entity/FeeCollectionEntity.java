@@ -20,7 +20,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("fee_collection")
+@Table("template.fee_collection")
 public class FeeCollectionEntity implements Persistable<String> {
 
     @Id

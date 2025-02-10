@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table("employee")
+@Table("template.employee")
 public class EmployeeEntity {
     @Id
     private String oid;

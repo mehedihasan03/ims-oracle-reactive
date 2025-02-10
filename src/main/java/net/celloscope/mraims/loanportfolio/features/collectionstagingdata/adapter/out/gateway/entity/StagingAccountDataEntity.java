@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table("staging_account_data")
+@Table("template.staging_account_data")
 public class StagingAccountDataEntity {
     @Id
     private String oid;

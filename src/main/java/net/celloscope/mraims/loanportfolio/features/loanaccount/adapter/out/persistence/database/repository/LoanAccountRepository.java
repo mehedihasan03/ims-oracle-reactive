@@ -23,8 +23,8 @@ public interface LoanAccountRepository extends ReactiveCrudRepository<LoanAccoun
         	la.loan_product_id AS product_code,
         	*
         FROM
-        	loan_account la
-        INNER JOIN loan_product lp ON
+        	template.loan_account la
+        INNER JOIN template.loan_product lp ON
         	la.loan_product_id = lp.loan_product_id
         WHERE
         	la.member_id = :memberId
@@ -38,8 +38,8 @@ public interface LoanAccountRepository extends ReactiveCrudRepository<LoanAccoun
     Mono<LoanAccountEntity> findByLoanAccountId(String loanAccountId);
 
     @Query("""
-    select lp.monthly_repay_day, * from loan_account la
-    inner join loan_product lp
+    select lp.monthly_repay_day, * from template.loan_account la
+    inner join template.loan_product lp
     on la.loan_product_id = lp.loan_product_id
     where la.loan_account_id = :loanAccountId;
     """)

@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("savings_closure")
+@Table("template.savings_closure")
 public class DPSClosureEntity implements Persistable<String> {
     @Id
     private String oid;

@@ -19,7 +19,7 @@ public interface StagingDataRepository extends R2dbcRepository<StagingDataEntity
                 SELECT
                 	*
                 FROM
-                	staging_data sd
+                	template.staging_data sd
                 WHERE
                 	sd.field_officer_id = :fieldOfficerId
                 	AND sd.samity_day != :samityDay;
@@ -32,7 +32,7 @@ public interface StagingDataRepository extends R2dbcRepository<StagingDataEntity
                 	sd.field_officer_name_en,
                 	sd.field_officer_name_bn
                 FROM
-                	staging_data sd
+                	template.staging_data sd
                 WHERE
                 	sd.field_officer_id = :fieldOfficerId
                 LIMIT 1;

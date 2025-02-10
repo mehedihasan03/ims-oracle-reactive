@@ -20,7 +20,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("transaction_history")
+@Table("template.transaction_history")
 public class TransactionHistoryEntity implements Persistable<String> {
     @Id
     private String oid;

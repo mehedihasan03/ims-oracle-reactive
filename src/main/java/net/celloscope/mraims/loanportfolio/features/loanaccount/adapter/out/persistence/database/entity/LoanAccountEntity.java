@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("loan_account")
+@Table("template.loan_account")
 public class LoanAccountEntity extends BaseToString implements Persistable<String> {
 
     @Id

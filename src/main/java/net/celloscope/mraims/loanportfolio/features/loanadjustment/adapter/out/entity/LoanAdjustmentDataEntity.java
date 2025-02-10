@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("loan_adjustment_data")
+@Table("template.loan_adjustment_data")
 public class LoanAdjustmentDataEntity implements Persistable<String> {
 
     @Id

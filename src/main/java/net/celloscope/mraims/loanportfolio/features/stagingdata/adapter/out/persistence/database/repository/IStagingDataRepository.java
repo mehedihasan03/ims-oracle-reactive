@@ -20,8 +20,8 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 				m.mobile,
 				m.mfi_id,
 				m.*,
-			FROM "member" m
-			INNER JOIN mem_smt_off_pri_map msopm 
+			FROM template."member" m
+			INNER JOIN template.mem_smt_off_pri_map msopm 
 			ON msopm.member_id = m.member_id
 			WHERE msopm.samity_id = :samityId
 			AND msopm.status = 'Active';
@@ -40,7 +40,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 			 	sd.downloaded_on,
 			 	sd.downloaded_by
 			FROM
-			 	staging_data sd
+			 	template.staging_data sd
 			WHERE
 			 	sd.samity_id = :samityId;
 			""")
@@ -58,7 +58,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 			    sd.field_officer_name_bn,
 			    sd.mfi_id
 			  FROM
-			    staging_data sd
+			    template.staging_data sd
 			  WHERE
 			    sd.samity_id = :samityId;
 			""")
@@ -77,8 +77,8 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 			    sd.field_officer_name_bn,
 			    sd.mfi_id
 			  FROM
-			    staging_data sd
-			  INNER JOIN staging_account_data sad ON
+			    template.staging_data sd
+			  INNER JOIN template.staging_account_data sad ON
 			    sad.member_id = sd.member_id
 			  WHERE
 			    sad.loan_account_id  = :accountId
@@ -95,8 +95,8 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 			    sd.mfi_id,
 			    sd.staging_data_id
 			  FROM
-			    staging_data sd
-			  INNER JOIN staging_account_data sad ON
+			    template.staging_data sd
+			  INNER JOIN template.staging_account_data sad ON
 			    sad.member_id = sd.member_id
 			  WHERE
 			    sad.loan_account_id  = :accountId
@@ -119,26 +119,12 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 					    sd.field_officer_name_bn,
 					    sd.mfi_id
 				   FROM
-				      staging_data sd
+				      template.staging_data sd
 				   WHERE
 				      sd.member_id = :memberId
 				   LIMIT 1;
 			""")
 	Mono<StagingDataDetailViewEntity> getSamityInfoForStagingDataDetailViewByMemberId(String memberId);
-	
-/*	@Query("""
-				SELECT DISTINCT
-			    sd.member_id,
-			    sd.member_name_en,
-			    sd.member_name_bn,
-			    sd.mobile,
-			    sd.staging_data_id
-			  FROM
-			    staging_data sd
-				WHERE
-					sd.member_id = :memberId;
-			""")
-	Mono<StagingDataEntity> getMemberInfoForStagingDataDetailViewByMemberId(String memberId);*/
 
 	Mono<StagingDataEntity> getStagingDataEntityByMemberId(String memberId);
 	
@@ -148,7 +134,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 					SELECT
 			      DISTINCT sd.samity_id
 			    FROM
-			      staging_data sd
+			      template.staging_data sd
 			    WHERE
 			      sd.field_officer_id IN (:fieldOfficerIdList)
 			    ORDER BY
@@ -161,17 +147,17 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 					SELECT
 			      count(DISTINCT sd.samity_id)
 			    FROM
-			      staging_data sd
+			      template.staging_data sd
 			    WHERE
 			      sd.field_officer_id IN (:fieldOfficerIdList);
 			""")
 	Mono<Integer> getTotalCountByFieldOfficerList(List<String> fieldOfficerIdList);
 	
 	@Query("""
-					SELECT
+				SELECT
 			      count(DISTINCT sd.samity_id)
 			    FROM
-			      staging_data sd
+			      template.staging_data sd
 			    WHERE
 			      sd.field_officer_id IN (:fieldOfficerIdList)
 			      AND sd.samity_day = :samityDay;
@@ -182,7 +168,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 					SELECT
 			      count(DISTINCT sd.samity_id)
 			    FROM
-			      staging_data sd
+			      template.staging_data sd
 			    WHERE
 			      sd.field_officer_id IN (:fieldOfficerIdList)
 			      AND sd.samity_day != :samityDay;
@@ -194,7 +180,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 			    	DISTINCT
 			    	sd.samity_id
 			    FROM
-			    	staging_data sd
+			    	template.staging_data sd
 			    WHERE
 			    	sd.field_officer_id IN (:fieldOfficerId)
 			    	AND sd.samity_day = :samityDay
@@ -207,7 +193,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 			    	DISTINCT
 			    	sd.samity_id
 			    FROM
-			    	staging_data sd
+			    	template.staging_data sd
 			    WHERE
 			    	sd.field_officer_id IN (:fieldOfficerId)
 			    	AND sd.samity_day != :samityDay
@@ -216,12 +202,9 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 	Flux<String> findSamityIdListByFieldOfficerIdListForNonSamityDay(List<String> fieldOfficerIdList, String samityDay, Integer limit, Integer offset);
 	
 	@Query("""
-				SELECT DISTINCT s.samity_id FROM samity s WHERE s.field_officer_id = :fieldOfficerId ORDER BY s.samity_id;
+				SELECT DISTINCT s.samity_id FROM template.samity s WHERE s.field_officer_id = :fieldOfficerId ORDER BY s.samity_id;
 			""")
 	Flux<String> getSamityIdListByFieldOfficer(String fieldOfficerId);
-
-
-	Mono<Void> deleteAllByProcessId(String processId);
 
 	Flux<StagingDataEntity> findAllByManagementProcessIdOrderBySamityId(String managementProcessId);
 

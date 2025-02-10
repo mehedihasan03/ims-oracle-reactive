@@ -17,7 +17,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_data_edit_history")
+@Table("template.staging_data_edit_history")
 public class StagingDataEditHistoryEntity implements Persistable<String> {
 
     @Id

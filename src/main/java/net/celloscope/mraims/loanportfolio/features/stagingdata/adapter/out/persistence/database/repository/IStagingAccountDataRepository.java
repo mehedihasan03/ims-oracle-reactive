@@ -18,7 +18,7 @@ public interface IStagingAccountDataRepository extends ReactiveCrudRepository<St
                         SELECT
                         	*
                         FROM
-                        	staging_account_data sad
+                        	template.staging_account_data sad
                         WHERE
                         	sad.member_id = :memberId
                         	AND sad.loan_account_id IS NOT NULL;
@@ -29,7 +29,7 @@ public interface IStagingAccountDataRepository extends ReactiveCrudRepository<St
                         SELECT
                         	*
                         FROM
-                        	staging_account_data sad
+                        	template.staging_account_data sad
                         WHERE
                         	sad.member_id = :memberId
                         	AND sad.savings_account_id IS NOT NULL;
@@ -43,8 +43,8 @@ public interface IStagingAccountDataRepository extends ReactiveCrudRepository<St
                             	sad.product_name_bn,
                             	sum(sad.total_due) AS total_due
                             FROM
-                            	staging_account_data sad
-                            INNER JOIN staging_data sd ON
+                            	template.staging_account_data sad
+                            INNER JOIN template.staging_data sd ON
                             	sad.member_id = sd.member_id
                             WHERE
                             	sad.loan_account_id IS NOT NULL
@@ -65,8 +65,8 @@ public interface IStagingAccountDataRepository extends ReactiveCrudRepository<St
                         	sad.savings_product_name_bn AS product_name_bn,
                         	sum(sad.target_amount) AS total_target
                         FROM
-                        	staging_account_data sad
-                        INNER JOIN staging_data sd ON
+                        	template.staging_account_data sad
+                        INNER JOIN template.staging_data sd ON
                         	sad.member_id = sd.member_id
                         WHERE
                         	sad.savings_account_id IS NOT NULL
@@ -84,7 +84,7 @@ public interface IStagingAccountDataRepository extends ReactiveCrudRepository<St
                         SELECT DISTINCT
                         	*
                         FROM
-                        	staging_account_data sad
+                        	template.staging_account_data sad
                         WHERE
                         	sad.loan_account_id = :accountId
                         	OR sad.savings_account_id = :accountId

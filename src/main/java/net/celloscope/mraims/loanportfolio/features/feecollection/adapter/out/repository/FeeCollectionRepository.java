@@ -12,7 +12,7 @@ public interface FeeCollectionRepository extends ReactiveCrudRepository<FeeColle
     Flux<FeeCollectionEntity> findAllByOfficeIdAndManagementProcessIdOrManagementProcessIdIsNull(String officeId, String managementProcessId);
     @Query("""
     update fee_collection
-    set management_process_id = null, credit_ledger_id = null , credit_subledger_id = null, status = :status
+    set template.management_process_id = null, credit_ledger_id = null , credit_subledger_id = null, status = :status
     where management_process_id = :managementProcessId and office_id = :officeId;    
     """)
     Flux<FeeCollectionEntity> rollbackFeeCollectionOnMISDayEndRevert(String officeId, String managementProcessId, String status);
