@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("collection_staging_data_history")
+@Table("template.collection_staging_data_history")
 public class CollectionStagingDataHistoryEntity extends BaseToString implements Persistable<String> {
 
     @Id

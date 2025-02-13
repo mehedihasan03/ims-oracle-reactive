@@ -13,10 +13,10 @@ public interface CollectionStagingDataHistoryRepository extends R2dbcRepository<
 
     @Query("""
             select csdh.*
-                from collection_staging_data_history csdh
-                    join collection_staging_data csd
+                from template.collection_staging_data_history csdh
+                    join template.collection_staging_data csd
                         on csdh.collection_staging_data_id = csd.collection_staging_data_id
-                    join mem_smt_off_pri_map msopm
+                    join template.mem_smt_off_pri_map msopm
                         on csd.samity_id = msopm.samity_id
                 where msopm.office_id  = :OFFICE_ID
                     and csd.status = :STATUS

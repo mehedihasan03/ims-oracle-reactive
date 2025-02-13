@@ -15,7 +15,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table("staging_process_tracker_history")
+@Table("template.staging_process_tracker_history")
 public class StagingProcessTrackerHistoryEntity implements Persistable<String> {
 
     @Id

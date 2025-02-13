@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("interest_chart")
+@Table("template.interest_chart")
 public class InterestChart {
     private String oid;
     private String interestChartId;

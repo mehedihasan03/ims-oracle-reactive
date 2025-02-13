@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("auto_voucher_detail")
+@Table("template.auto_voucher_detail")
 public class DeleteAutoVoucherDetailEntity implements Persistable<String> {
     @Id
     private String oid;

@@ -21,7 +21,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("member")
+@Table("template.member")
 public class Member implements Persistable<String> {
 
     @Id

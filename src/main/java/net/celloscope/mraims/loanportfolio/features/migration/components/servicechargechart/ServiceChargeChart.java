@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table("service_charge_chart")
+@Table("template.service_charge_chart")
 public class ServiceChargeChart {
 
     private String oid;

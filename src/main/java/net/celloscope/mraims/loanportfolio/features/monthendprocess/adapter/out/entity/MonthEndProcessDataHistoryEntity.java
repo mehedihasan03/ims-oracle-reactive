@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("month_end_process_data_history")
+@Table("template.month_end_process_data_history")
 public class MonthEndProcessDataHistoryEntity implements Persistable<String> {
     @Id
     private String oid;

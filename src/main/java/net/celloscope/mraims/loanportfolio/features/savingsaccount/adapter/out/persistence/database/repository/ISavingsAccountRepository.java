@@ -21,22 +21,16 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
         	sp.savings_prod_name_bn AS savings_product_name_bn,
         	*
         FROM
-        	savings_account sa
-        INNER JOIN savings_product sp ON
+        	template.savings_account sa
+        INNER JOIN template.savings_product sp ON
         	sa.savings_product_id = sp.savings_product_id
         WHERE sa.member_id = :memberId;
     """)
     Flux<SavingsAccount> findAllByMemberId(String memberId);
 
-    /*@Query("""
-    select sp.min_deposit_amount , sp.max_deposit_amount , sa.* from savings_account sa
-    inner join savings_product sp
-    on sa.savings_product_id = sp.savings_product_id
-    where sa.savings_account_id = :savingsAccountId;
-    """)*/
     @Query("""
-    SELECT sp.MIN_DEPOSIT_AMOUNT, sp.MAX_DEPOSIT_AMOUNT, sa.* FROM SAVINGS_ACCOUNT sa
-    INNER JOIN SAVINGS_PRODUCT sp
+    SELECT sp.MIN_DEPOSIT_AMOUNT, sp.MAX_DEPOSIT_AMOUNT, sa.* FROM template.SAVINGS_ACCOUNT sa
+    INNER JOIN template.SAVINGS_PRODUCT sp
     ON sa.SAVINGS_PRODUCT_ID = sp.SAVINGS_PRODUCT_ID
     WHERE sa.SAVINGS_ACCOUNT_ID = :savingsAccountId;
     """)
@@ -44,7 +38,7 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
 
     @Query("""
     SELECT *
-    FROM savings_account sa
+    FROM template.savings_account sa
     WHERE
     sa.savings_type_id = :savingsTypeId
     AND EXTRACT(DAY FROM sa.acct_start_date ::date) BETWEEN EXTRACT(DAY FROM :startDate::date) AND EXTRACT(DAY FROM :endDate::date)
@@ -58,8 +52,8 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
         	sp.savings_prod_name_bn AS savings_product_name_bn,
         	*
         FROM
-        	savings_account sa
-        INNER JOIN savings_product sp ON
+        	template.savings_account sa
+        INNER JOIN template.savings_product sp ON
         	sa.savings_product_id = sp.savings_product_id
         WHERE
         	sa.member_id in (:memberIdList);
@@ -68,7 +62,7 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
 
     @Query("""
    SELECT *
-   FROM savings_account
+   FROM template.savings_account
    WHERE member_id LIKE :officeId || '-%'
    and status = :status;
    """)
@@ -78,12 +72,12 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
 
     SELECT sa.savings_account_id , sa.savings_product_id , sp.savings_prod_name_en, sp.savings_prod_name_bn, sa.member_id , m.member_name_en , m.member_name_bn, sa.acct_start_date , sa.savings_amount , ic.interest AS interest_rate, sa.acct_end_date , sa.status,
     sa.deposit_term, sa.deposit_term_period, sa.deposit_every
-    FROM savings_account sa
-    INNER JOIN interest_chart ic
+    FROM template.savings_account sa
+    INNER JOIN template.interest_chart ic
     ON sa.savings_product_id = ic.savings_product_id
-    INNER JOIN savings_product sp
+    INNER JOIN template.savings_product sp
     ON sp.savings_product_id = sa.savings_product_id
-    INNER JOIN "member" m
+    INNER JOIN template."member" m
     ON sa.member_id = m.member_id
     WHERE sa.member_id LIKE :officeId || '-%'
     AND sa.savings_type_id = :savingsTypeId
@@ -103,12 +97,12 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
     sa.status, sa.oid AS savings_account_oid,
     sa.deposit_term, sa.deposit_term_period, sa.deposit_every,
     sa.savings_type_id
-    FROM savings_account sa
-    INNER JOIN interest_chart ic
+    FROM template.savings_account sa
+    INNER JOIN template.interest_chart ic
     ON sa.savings_product_id = ic.savings_product_id
-    INNER JOIN savings_product sp
+    INNER JOIN template.savings_product sp
     ON sp.savings_product_id = sa.savings_product_id
-    INNER JOIN "member" m
+    INNER JOIN template."member" m
     ON sa.member_id = m.member_id
     WHERE sa.savings_account_id = :savingsAccountId
     AND sa.savings_type_id = :savingsTypeId;
@@ -119,12 +113,12 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
 
     SELECT sa.savings_account_id , sa.savings_product_id , sp.savings_prod_name_en, sp.savings_prod_name_bn, sa.member_id , m.member_name_en , m.member_name_bn, sa.acct_start_date , sa.savings_amount , sa.balance, ic.interest AS interest_rate, sa.acct_end_date , sa.status,
     sa.deposit_term, sa.deposit_term_period, sa.deposit_every
-    FROM savings_account sa
-    INNER JOIN interest_chart ic
+    FROM template.savings_account sa
+    INNER JOIN template.interest_chart ic
     ON sa.savings_product_id = ic.savings_product_id
-    INNER JOIN savings_product sp
+    INNER JOIN template.savings_product sp
     ON sp.savings_product_id = sa.savings_product_id
-    INNER JOIN "member" m
+    INNER JOIN template."member" m
     ON sa.member_id = m.member_id
     WHERE sa.member_id LIKE :officeId || '-%'
     AND sa.savings_type_id = :savingsTypeId
@@ -135,12 +129,12 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
     @Query("""
             SELECT sa.savings_account_id , sa.savings_product_id , sp.savings_prod_name_en, sp.savings_prod_name_bn, sa.member_id , m.member_name_en , m.member_name_bn, sa.acct_start_date , sa.savings_amount , sa.balance, ic.interest AS interest_rate, sa.acct_end_date , sa.status,
             sa.deposit_term, sa.deposit_term_period, sa.deposit_every
-            FROM savings_account sa
-            INNER JOIN interest_chart ic
+            FROM template.savings_account sa
+            INNER JOIN template.interest_chart ic
             ON sa.savings_product_id = ic.savings_product_id
-            INNER JOIN savings_product sp
+            INNER JOIN template.savings_product sp
             ON sp.savings_product_id = sa.savings_product_id
-            INNER JOIN "member" m
+            INNER JOIN template."member" m
             ON sa.member_id = m.member_id
             WHERE sa.member_id LIKE :officeId || '-%'
             AND sa.savings_type_id = :savingsTypeId
@@ -168,21 +162,21 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
     sa.deposit_term, sa.deposit_term_period, sa.deposit_every,
     s.samity_id, s.samity_day, sa.monthly_repay_day,
     sa.savings_type_id
-    FROM savings_account sa
-    INNER JOIN interest_chart ic
+    FROM template.savings_account sa
+    INNER JOIN template.interest_chart ic
     ON sa.savings_product_id = ic.savings_product_id
-    INNER JOIN savings_product sp
+    INNER JOIN template.savings_product sp
     ON sp.savings_product_id = sa.savings_product_id
-    INNER JOIN "member" m
+    INNER JOIN template."member" m
     ON sa.member_id = m.member_id
-    INNER JOIN mem_smt_off_pri_map msopm
+    INNER JOIN template.mem_smt_off_pri_map msopm
     ON m.member_id = msopm.member_id
-    INNER JOIN samity s
+    INNER JOIN template.samity s
     ON msopm.samity_id = s.samity_id
     WHERE sa.savings_account_id = :savingsAccountId
     AND sa.savings_type_id = :savingsTypeId
     AND msopm.status = 'Active'
-    LIMIT 1;
+    FETCH FIRST 1 ROWS ONLY;
     """)
     Mono<DPSAccountDTO> getDPSAccountDetailsBySavingsAccountId(String savingsAccountId, String savingsTypeId);
 
@@ -198,19 +192,19 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
     sa.deposit_term, sa.deposit_term_period, sa.deposit_every,
     s.samity_id, s.samity_day, sa.monthly_repay_day,
     sa.savings_type_id
-    FROM savings_account sa
-    INNER JOIN interest_chart ic
+    FROM template.savings_account sa
+    INNER JOIN template.interest_chart ic
     ON sa.savings_product_id = ic.savings_product_id
-    INNER JOIN savings_product sp
+    INNER JOIN template.savings_product sp
     ON sp.savings_product_id = sa.savings_product_id
-    INNER JOIN "member" m
+    INNER JOIN template."member" m
     ON sa.member_id = m.member_id
-    INNER JOIN mem_smt_off_pri_map msopm
+    INNER JOIN template.mem_smt_off_pri_map msopm
     ON m.member_id = msopm.member_id
-    INNER JOIN samity s
+    INNER JOIN template.samity s
     ON msopm.samity_id = s.samity_id
     WHERE sa.savings_account_id = :savingsAccountId
-    LIMIT 1;
+    FETCH FIRST 1 ROWS ONLY;
     """)
     Mono<SavingsAccountDto> getSavingsAccountInfoBySavingsAccountId(String savingsAccountId);
 

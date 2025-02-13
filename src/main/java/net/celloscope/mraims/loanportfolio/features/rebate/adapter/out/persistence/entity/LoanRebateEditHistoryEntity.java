@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("loan_rebate_data_edit_history")
+@Table("template.loan_rebate_data_edit_history")
 public class LoanRebateEditHistoryEntity implements Persistable<String> {
     @Id
     private String oid;

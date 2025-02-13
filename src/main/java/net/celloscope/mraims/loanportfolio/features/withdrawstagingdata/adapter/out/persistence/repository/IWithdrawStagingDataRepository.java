@@ -22,7 +22,7 @@ public interface IWithdrawStagingDataRepository extends ReactiveCrudRepository<S
         SELECT
         	sum(amount)
         FROM
-        	staging_withdraw_data swd
+        	template.staging_withdraw_data swd
         WHERE
         	swd.samity_id = :samityId;
     """)
@@ -37,19 +37,19 @@ public interface IWithdrawStagingDataRepository extends ReactiveCrudRepository<S
     Flux<StagingWithdrawDataEntity> findAllBySamityId(String samityId);
 
     @Query("""
-        SELECT DISTINCT samity_id FROM staging_withdraw_data swd WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
+        SELECT DISTINCT samity_id FROM template.staging_withdraw_data swd WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
     """)
     Flux<String> getSamityIdListLockedByUserForAuthorization(String lockedBy);
 
     Flux<StagingWithdrawDataEntity> findAllBySamityIdIn(List<String> samityIdList);
 
     @Query("""
-            SELECT * FROM staging_withdraw_data WHERE management_process_id = :managementProcessId and case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end LIMIT :limit OFFSET :offset;
+            SELECT * FROM template.staging_withdraw_data WHERE management_process_id = :managementProcessId and case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end LIMIT :limit OFFSET :offset;
             """)
     Flux<StagingWithdrawDataEntity> findAllWithdrawStagingDataByLoginId(String managementProcessId, String fieldOfficerId, int limit, int offset);
 
     @Query("""
-            SELECT count(*) FROM staging_withdraw_data WHERE management_process_id = :managementProcessId and case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end;
+            SELECT count(*) FROM template.staging_withdraw_data WHERE management_process_id = :managementProcessId and case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end;
             """)
     Mono<Long> countWithdrawData(String managementProcessId, String fieldOfficerId);
 

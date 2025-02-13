@@ -17,7 +17,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("office_event_tracker")
+@Table("template.office_event_tracker")
 public class OfficeEventTrackerEntity implements Persistable<String> {
 	
 	@Id

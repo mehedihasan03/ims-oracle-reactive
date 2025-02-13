@@ -14,7 +14,7 @@ public interface MetaPropertyRepository extends R2dbcRepository<MetaPropertyEnti
 
     @Query("""
             select "oid", property_id, property_value, description, status
-            from metaproperty
+            from template.metaproperty
             where description = :DESC
             and status = :STATUS;
             """)

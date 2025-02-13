@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("ais_meta_data")
+@Table("template.ais_meta_data")
 public class AisMetaDataEntity {
     @Id
     private String oid;

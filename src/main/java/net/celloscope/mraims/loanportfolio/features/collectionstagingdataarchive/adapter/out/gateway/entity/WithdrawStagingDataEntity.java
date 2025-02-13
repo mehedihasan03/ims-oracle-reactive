@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("staging_withdraw_data")
+@Table("template.staging_withdraw_data")
 public class WithdrawStagingDataEntity extends BaseToString {
 
     @Id

@@ -18,7 +18,7 @@ public interface LoanWaiverRepository extends ReactiveCrudRepository<LoanWaiverE
     Flux<LoanWaiverEntity> findAllBySamityIdIn(List<String> samityIdList);
 
     @Query("""
-                SELECT DISTINCT samity_id FROM loan_waiver_data WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
+                SELECT DISTINCT samity_id FROM template.loan_waiver_data WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
             """)
     Flux<String> getSamityIdListLockedByUserForAuthorization(String lockedBy);
 }

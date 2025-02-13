@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("savings_account_closure")
+@Table("template.savings_account_closure")
 public class SavingsClosureEntity implements Persistable<String> {
 
     @Id

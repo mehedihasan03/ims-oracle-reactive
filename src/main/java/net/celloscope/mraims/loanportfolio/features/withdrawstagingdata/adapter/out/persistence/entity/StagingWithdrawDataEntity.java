@@ -16,7 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_withdraw_data")
+@Table("template.staging_withdraw_data")
 public class StagingWithdrawDataEntity implements Persistable<String> {
 
     @Id

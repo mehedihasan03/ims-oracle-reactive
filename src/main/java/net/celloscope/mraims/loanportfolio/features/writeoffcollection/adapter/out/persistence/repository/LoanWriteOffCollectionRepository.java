@@ -12,7 +12,7 @@ import java.util.List;
 public interface LoanWriteOffCollectionRepository extends ReactiveCrudRepository<LoanWriteOffCollectionEntity, String> {
 
     @Query("""
-            select * from loan_write_off_collection lwoc where lwoc.samity_id like :officeId || '%' and lwoc.created_on between :startDate and :endDate;
+            select * from template.loan_write_off_collection lwoc where lwoc.samity_id like :officeId || '%' and lwoc.created_on between :startDate and :endDate;
             """)
     Flux<LoanWriteOffCollectionEntity> getLoaWriteOffDataByOfficeIdInASpecificDateRange(String officeId, LocalDateTime startDate, LocalDateTime endDate);
 
@@ -21,13 +21,13 @@ public interface LoanWriteOffCollectionRepository extends ReactiveCrudRepository
     Flux<LoanWriteOffCollectionEntity> findAllBySamityIdIn(List<String> samityIdList);
 
     @Query("""
-                SELECT DISTINCT samity_id FROM loan_write_off_collection WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
+                SELECT DISTINCT samity_id FROM template.loan_write_off_collection WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
             """)
     Flux<String> getSamityIdListLockedByUserForAuthorization(String loginId);
     Flux<LoanWriteOffCollectionEntity> findAllByManagementProcessIdAndSamityId(String managementProcessId, String samityId);
 
     @Query("""
-    update loan_write_off_collection
+    update template.loan_write_off_collection
     set approved_on = :approvedOn, approved_by = :loginId, status = :status, locked_by = null, locked_on = null, is_locked = 'No', edit_commit = 'No'
     where oid = :oid; """)
     Flux<LoanWriteOffCollectionEntity> updateLoanWriteOffEntitiesForAuthorization(String oid, String loginId, LocalDateTime approvedOn, String status);

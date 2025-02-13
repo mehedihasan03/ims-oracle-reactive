@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("dps_repayment_schedule")
+@Table("template.dps_repayment_schedule")
 public class DPSRepaymentScheduleEntity implements Persistable<String> {
     @Id
     private String oid;

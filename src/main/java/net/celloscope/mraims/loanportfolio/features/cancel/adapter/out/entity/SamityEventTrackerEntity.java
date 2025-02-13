@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("samity_event_tracker")
+@Table("template.samity_event_tracker")
 public class SamityEventTrackerEntity implements Persistable<String> {
 	@Id
 	private String oid;

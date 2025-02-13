@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 public interface MonthEndProcessTrackerRepository extends ReactiveCrudRepository<MonthEndProcessTrackerEntity, String> {
 
     @Query("""
-        SELECT * FROM month_end_process_tracker mept WHERE office_id = :officeId ORDER BY month_end_date DESC LIMIT :limit OFFSET :offset;
+        SELECT * FROM template.month_end_process_tracker mept WHERE office_id = :officeId ORDER BY month_end_date DESC LIMIT :limit OFFSET :offset;
     """)
     Flux<MonthEndProcessTrackerEntity> findAllByOfficeIdOrderByMonthEndDateDesc(String officeId, Integer limit, Integer offset);
 

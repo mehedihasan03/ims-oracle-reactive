@@ -397,7 +397,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             		*
             	  FROM
             		loan_account la
-            	  INNER JOIN loan_product lp ON
+            	  INNER JOIN template.loan_product lp ON
             		la.loan_product_id = lp.loan_product_id
             	  WHERE
             		la.status in (:statusList)
@@ -477,7 +477,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
     Flux<FinancialPeriodEntity> getFinancialPeriodEntriesForOffice(String officeId);
 
     @Query("""
-            	SELECT i.oid FROM common.institute i WHERE i.institute_id = :mfiId FETCH 1 ROW ONLY;
+            	SELECT i.oid FROM common.institute i WHERE i.institute_id = :mfiId FETCH 1 ROWS ONLY;
             """)
     Mono<String> getInstituteOidByMFIId(String mfiId);
 
@@ -523,13 +523,13 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             """)
     Mono<MemberAndOfficeAndSamityEntity> getMemberOfficeAndSamityEntityByMemberId(String memberId);
 
-    @Query("SELECT * FROM template.loan_adjustment_data lad WHERE lad.loan_account_id = :loanAccountId FETCH 1 ROW ONLY;")
+    @Query("SELECT * FROM template.loan_adjustment_data lad WHERE lad.loan_account_id = :loanAccountId FETCH 1 ROWS ONLY;")
     Mono<LoanAdjustmentDataEntity> findFirstLoanAdjustmentDataByLoanAccountId(String loanAccountId);
 
-    @Query("SELECT * FROM template.collection_staging_data csd WHERE csd.loan_account_id = :loanAccountId FETCH 1 ROW ONLY;")
+    @Query("SELECT * FROM template.collection_staging_data csd WHERE csd.loan_account_id = :loanAccountId FETCH 1 ROWS ONLY;")
     Mono<CollectionStagingDataEntity> findFirstCollectionPaymentDataByLoanAccountId(String loanAccountId);
 
-    @Query("SELECT * FROM template.collection_staging_data csd WHERE csd.savings_account_id = :savingsAccountId FETCH 1 ROW ONLY;")
+    @Query("SELECT * FROM template.collection_staging_data csd WHERE csd.savings_account_id = :savingsAccountId FETCH 1 ROWS ONLY;")
     Mono<CollectionStagingDataEntity> findFirstCollectionPaymentDataBySavingsAccountId(String savingsAccountId);
 
     @Query("SELECT DISTINCT office_id  FROM template.office o WHERE status = 'Active';")
@@ -545,7 +545,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
         on msopm.member_id = la.member_id 
         where la.loan_account_id = :loanAccountId
         and msopm.status = 'Active') 
-    order by mpt.business_date desc FETCH 1 ROW ONLY;
+    order by mpt.business_date desc FETCH 1 ROWS ONLY;
     """)
     Mono<String> getManagementProcessIdByLoanAccountId(String loanAccountId);
 

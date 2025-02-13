@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("loan_product")
+@Table("template.loan_product")
 public class LoanProduct {
 
     private String oid;

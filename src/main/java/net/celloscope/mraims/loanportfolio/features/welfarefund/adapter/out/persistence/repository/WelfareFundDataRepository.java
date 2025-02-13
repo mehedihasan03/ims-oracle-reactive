@@ -12,7 +12,7 @@ import java.util.List;
 public interface WelfareFundDataRepository extends ReactiveCrudRepository<WelfareFundDataEntity, String> {
 
     @Query("""
-            SELECT loan_account_id, office_id, transaction_date, amount, status FROM welfare_fund_data WHERE office_id = :officeId AND status != :status ORDER BY transaction_date DESC LIMIT :limit OFFSET :offset;
+            SELECT loan_account_id, office_id, transaction_date, amount, status FROM template.welfare_fund_data WHERE office_id = :officeId AND status != :status ORDER BY transaction_date DESC LIMIT :limit OFFSET :offset;
             """)
     Flux<WelfareFundDataEntity> getWelfareFundDataEntitiesByOfficeIdFilterByStatus(String officeId, long limit, long offset, String status);
 

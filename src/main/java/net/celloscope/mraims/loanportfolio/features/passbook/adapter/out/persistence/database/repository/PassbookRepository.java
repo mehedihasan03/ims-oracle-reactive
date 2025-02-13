@@ -26,7 +26,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     LocalDate getLastCreatedDate(String transactionCode, String loanAccountId);
 
     @Query("""
-            select * from passbook p
+            select * from template.passbook p
             where loan_account_id = :loanAccountId
             order by install_no desc, created_on desc
             limit 1;
@@ -35,7 +35,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
 
     @Query("""
             select loan_repay_schedule_id , install_no , install_date , installment_begin_balance , prin_remain , sc_remain , installment_end_balance , total_loan_paid_till_date , total_loan_pay_remain, prin_paid_till_date , sc_paid_till_date
-            from passbook p
+            from template.passbook p
             where loan_account_id = :loanAccountId
             and transaction_code = :transactionCode
             order by created_on desc
@@ -44,7 +44,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Mono<ResultSet> getResultSetFromPassbook(String loanAccountId, String transactionCode);
 
     @Query("""
-                    INSERT INTO passbook (
+                    INSERT INTO template.passbook (
                       transaction_id,
                       transaction_code,
                       member_id,
@@ -109,13 +109,13 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Mono<PassbookEntity> insertRecordPassbook(PassbookEntity passbookEntity);
 
 /*    @Query("""
-            select * from passbook p
+            select * from template.passbook p
             where savings_account_id = :savingsAccountId
             order by transaction_date desc, created_on desc
             limit 1;
             """)*/
     @Query("""
-                SELECT * FROM PASSBOOK P
+                SELECT * from template.PASSBOOK P
                 WHERE SAVINGS_ACCOUNT_ID = :savingsAccountId
                 ORDER BY TRANSACTION_DATE DESC, CREATED_ON DESC
                 FETCH FIRST ROW ONLY;
@@ -123,13 +123,13 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Mono<PassbookEntity> getLastPassbookEntryBySavingsAccountId(String savingsAccountId);
 
 /*    @Query("""
-            select * from passbook p
+            select * from template.passbook p
             where savings_account_oid = :savingsAccountOid
             order by created_on desc
             limit 1;
             """)*/
     @Query("""
-            SELECT * FROM PASSBOOK P
+            SELECT * from template.PASSBOOK P
             WHERE SAVINGS_ACCOUNT_OID = :savingsAccountOid
             ORDER BY CREATED_ON DESC
             FETCH FIRST ROW ONLY;
@@ -139,17 +139,17 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     @Query("""
             select X.*, Y.passbook_count from
                 (select s.samity_id, count(msopm.*) as total_member
-                from mem_smt_off_pri_map msopm
-                    join samity s
+                from template.mem_smt_off_pri_map msopm
+                    join template.samity s
                         on s.samity_id = msopm.samity_id
                     WHERE msopm.status = 'Active'
                 group by s.samity_id) X
             left join
                 (select s.samity_id, count(t.*) as passbook_count
-                from "passbook" t
-                    join mem_smt_off_pri_map msopm
+                from template."passbook" t
+                    join template.mem_smt_off_pri_map msopm
                         on t.member_id = msopm.member_id
-                    join samity s
+                    join template.samity s
                         on s.samity_id = msopm.samity_id
                 and t.transaction_date between :FROM_DATE and :TO_DATE
                 and msopm.status = 'Active'
@@ -160,10 +160,10 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
 
     @Query("""
             select *
-            from "passbook" t 
-                join mem_smt_off_pri_map msopm
+            from template."passbook" t 
+                join template.mem_smt_off_pri_map msopm
                     on t.member_id = msopm.member_id
-                join samity s
+                join template.samity s
                     on s.samity_id = msopm.samity_id
             where s.samity_id = :SAMITY_ID
             and t.transaction_date between :FROM_DATE and :TO_DATE
@@ -187,10 +187,10 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
 
     @Query("""
             select *
-            from "passbook" t
-            join mem_smt_off_pri_map msopm
+            from template."passbook" t
+            join template.mem_smt_off_pri_map msopm
             on t.member_id = msopm.member_id
-            join samity s
+            join template.samity s
             on s.samity_id = msopm.samity_id
             where s.samity_id = :SAMITY_ID
             and t.transaction_date between :FROM_DATE and :TO_DATE
@@ -198,9 +198,9 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
             and
                 case
                     when (:ACCOUNT_NO is not null and :ACCOUNT_NO != '')
-                        then (t.loan_account_oid = (select l."oid" from "loan_account" l where l.loan_account_id = :ACCOUNT_NO)
+                        then (t.loan_account_oid = (select l."oid" from template."loan_account" l where l.loan_account_id = :ACCOUNT_NO)
                             or loan_account_id = :ACCOUNT_NO
-                            or t.savings_account_oid = (select l."oid" from "savings_account" l where l.savings_account_id = :ACCOUNT_NO)
+                            or t.savings_account_oid = (select l."oid" from template."savings_account" l where l.savings_account_id = :ACCOUNT_NO)
                             or savings_account_id = :ACCOUNT_NO)
                     else 1 = 1
                 end
@@ -220,13 +220,13 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
 
     @Query("""
             select *
-            from samity s
+            from template.samity s
             where s.samity_id = :SAMITY_ID;
             """)
     Mono<Samity> getSamityForPassbookReport(@Param("SAMITY_ID") String samityId);
 
     @Query("""
-            select * from passbook p
+            select * from template.passbook p
             WHERE DATE(transaction_date) = :transactionDate::date
             AND savings_account_id = :savingsAccountId
             ORDER BY created_on;
@@ -234,17 +234,17 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Flux<PassbookEntity> findPassbookEntitiesBySavingsAccountIdAndTransactionDateOrderByCreatedOn(String savingsAccountId, LocalDate transactionDate);
 
     @Query("""
-                SELECT p.loan_repay_schedule_id FROM passbook p WHERE p.loan_repay_schedule_id IS NOT NULL AND p.transaction_id IN (:transactionIdList);
+                SELECT p.loan_repay_schedule_id from template.passbook p WHERE p.loan_repay_schedule_id IS NOT NULL AND p.transaction_id IN (:transactionIdList);
             """)
     Flux<String> getRepayScheduleIdListByTransactionList(List<String> transactionIdList);
 
     @Query("""
-                SELECT * FROM passbook p WHERE p.transaction_id IN (:transactionIdList);
+                SELECT * from template.passbook p WHERE p.transaction_id IN (:transactionIdList);
             """)
     Flux<PassbookEntity> getPassbookEntitiesByTransactionIdList(List<String> transactionIdList);
 
     @Query("""
-    SELECT * FROM passbook P
+    SELECT * from template.passbook P
     WHERE EXTRACT(YEAR FROM transaction_date) = :yearValue
     AND EXTRACT(MONTH FROM transaction_date) = :monthValue
     AND savings_account_oid = :savingsAccountOid
@@ -255,7 +255,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Flux<PassbookEntity> getPassbookEntitiesByManagementProcessIdAndLoanAccountIdIsNotNull(String managementProcessId);
     Flux<PassbookEntity> getPassbookEntitiesByLoanAccountIdIsNotNull();
     Flux<PassbookEntity> getPassbookEntitiesByManagementProcessIdAndSavingsAccountIdIsNotNull(String managementProcessId);
-    
+
     Flux<PassbookEntity> getPassbookEntitiesBySavingsAccountIdIsNotNull();
     Flux<PassbookEntity> getPassbookEntitiesByManagementProcessIdAndPaymentMode(String managementProcessId, String paymentMode);
     Flux<PassbookEntity> getPassbookEntitiesByPaymentMode(String paymentMode);
@@ -278,7 +278,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Flux<PassbookEntity> findAllByManagementProcessIdAndTransactionCodeAndSavingsTypeIdOrSavingsTypeIdIsNullAndPaymentMode(String managementProcessId, String transactionCode, String savingsTypeId, String paymentMode);
     @Query("""
     SELECT *
-    FROM passbook p
+    from template.passbook p
     WHERE transaction_code = :transactionCode
     AND management_process_id = :managementProcessId
     AND (payment_mode = :paymentMode OR :paymentMode IS NULL);
@@ -301,7 +301,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     Flux<PassbookEntity> findAllBySavingsAccountIdAndTransactionDateIsGreaterThanEqual(String loanAccountId, LocalDate transactionDate);
 
     @Query("""
-    select * from passbook p
+    select * from template.passbook p
     where loan_account_oid = :loanAccountOid
     and transaction_code in (:transactionCodes)
     order by created_on desc , install_no desc

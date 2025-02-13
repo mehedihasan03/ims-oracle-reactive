@@ -18,7 +18,7 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("fdr_schedule")
+@Table("template.fdr_schedule")
 public class FDRScheduleEntity implements Persistable<String> {
     @Id
     private String oid;

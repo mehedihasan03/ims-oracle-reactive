@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table("loan_repay_schedule")
+@Table("template.loan_repay_schedule")
 public class RepaymentScheduleEntity implements Persistable<String> {
     @Id
     private String oid;

@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("samity_event_tracker_history")
+@Table("template.samity_event_tracker_history")
 public class SamityEventTrackerHistoryEntity implements Persistable<String> {
 
     @Id

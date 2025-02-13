@@ -17,7 +17,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("management_process_tracker")
+@Table("template.management_process_tracker")
 public class ManagementProcessTrackerEntity implements Persistable<String> {
 	
 	@Id

@@ -22,7 +22,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("month_end_process_tracker")
+@Table("template.month_end_process_tracker")
 public class MonthEndProcessTrackerEntity implements Persistable<String> {
 
     @Id

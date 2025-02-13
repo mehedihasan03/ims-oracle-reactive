@@ -17,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-@Table("staging_account_data_history")
+@Table("template.staging_account_data_history")
 public class StagingAccountDataHistoryEntity implements Persistable<String> {
 
     @Id

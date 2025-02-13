@@ -20,7 +20,7 @@ import static java.util.Objects.isNull;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("day_end_process_tracker")
+@Table("template.day_end_process_tracker")
 public class DayEndProcessTrackerEntity implements Persistable<String> {
 
     @Id

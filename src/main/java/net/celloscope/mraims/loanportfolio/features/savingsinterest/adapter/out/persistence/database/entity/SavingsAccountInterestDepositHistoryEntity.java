@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("savings_account_interest_deposit_history")
+@Table("template.savings_account_interest_deposit_history")
 public class SavingsAccountInterestDepositHistoryEntity implements Persistable<String> {
 
     @Id

@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table("savings_account_interest_deposit")
+@Table("template.savings_account_interest_deposit")
 public class SavingsAccountInterestDepositEntity implements Persistable<String> {
 
     @Id

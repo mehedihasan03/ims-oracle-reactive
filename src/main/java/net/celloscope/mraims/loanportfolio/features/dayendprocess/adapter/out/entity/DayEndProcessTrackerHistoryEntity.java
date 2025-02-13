@@ -18,7 +18,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "day_end_process_tracker_history")
+@Table(name = "template.day_end_process_tracker_history")
 public class DayEndProcessTrackerHistoryEntity implements Persistable<String> {
 
     @Id

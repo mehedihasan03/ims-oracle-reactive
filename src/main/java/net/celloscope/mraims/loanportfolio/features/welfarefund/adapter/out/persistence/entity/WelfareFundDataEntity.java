@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("welfare_fund_data")
+@Table("template.welfare_fund_data")
 public class WelfareFundDataEntity implements Persistable<String> {
 
     @Id

@@ -15,7 +15,7 @@ public interface AccruedInterestRepository extends ReactiveCrudRepository<Saving
     @Query("""
     SELECT EXISTS (
     SELECT 1
-    FROM savings_account_interest_deposit said
+    FROM template.savings_account_interest_deposit said
     WHERE interest_calculation_month = :month
     and interest_calculation_year = :year
     and savings_account_id = :savingsAccountId

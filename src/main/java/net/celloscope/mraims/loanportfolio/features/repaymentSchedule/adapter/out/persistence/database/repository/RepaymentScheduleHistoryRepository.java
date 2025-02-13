@@ -13,7 +13,7 @@ public interface RepaymentScheduleHistoryRepository extends ReactiveCrudReposito
     Mono<Void> deleteAllByLoanRepayScheduleOidIn(List<String> loanRepayOid);
 
     @Query("""
-            SELECT * FROM loan_repayment_schedule_history lrs WHERE lrs.management_process_id = :managementProcessId;
+            SELECT * FROM template.loan_repayment_schedule_history lrs WHERE lrs.management_process_id = :managementProcessId;
             """)
     Flux<RepaymentScheduleHistoryEntity> findAllByManagementProcessIdV2(String managementProcessId);
     Flux<RepaymentScheduleHistoryEntity> findAllByManagementProcessIdAndLoanAccountId(String managementProcessId, String loanAccountId);

@@ -17,7 +17,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("staging_withdraw_data")
+@Table("template.staging_withdraw_data")
 public class WithdrawEntity extends BaseToString implements Persistable<String> {
     @Id
     private String oid;

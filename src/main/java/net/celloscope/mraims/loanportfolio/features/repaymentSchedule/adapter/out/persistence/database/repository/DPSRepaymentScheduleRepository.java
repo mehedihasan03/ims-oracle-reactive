@@ -12,7 +12,7 @@ import java.util.List;
 public interface DPSRepaymentScheduleRepository extends ReactiveCrudRepository<DPSRepaymentScheduleEntity, String> {
     Flux<DPSRepaymentScheduleEntity> getDPSRepaymentScheduleEntitiesBySavingsAccountId(String savingsAccountId);
     @Query("""
-    UPDATE dps_repayment_schedule drs
+    UPDATE template.dps_repayment_schedule drs
     SET status = :status , updated_on = :businessDate, updated_by = :loginId, management_process_id = :managementProcessId, actual_repayment_date = :businessDate
     WHERE savings_account_id = :savingsAccountId
     AND repayment_no IN (:paidRepaymentNos);

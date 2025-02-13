@@ -28,7 +28,7 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
     Flux<CollectionStagingDataEntity> findAllBySamityIdAndCollectionType(String samityId, String collectionType);
 
     @Query("""
-                SELECT DISTINCT samity_day FROM staging_data sd WHERE sd.samity_id = :samityId LIMIT 1;
+                SELECT DISTINCT samity_day FROM template.staging_data sd WHERE sd.samity_id = :samityId LIMIT 1;
             """)
     Mono<String> getSamityDayFromSamityId(String samityId);
 
@@ -36,8 +36,8 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
                 SELECT
                 	count(*)
                 FROM
-                	staging_data sd
-                INNER JOIN staging_account_data sad ON
+                	template.staging_data sd
+                INNER JOIN template.staging_account_data sad ON
                 	sd.member_id = sad.member_id
                 WHERE
                 	sd.samity_id = :samityId
@@ -52,8 +52,8 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
                 SELECT
                 	count(*)
                 FROM
-                	staging_data sd
-                INNER JOIN staging_account_data sad ON
+                	template.staging_data sd
+                INNER JOIN template.staging_account_data sad ON
                 	sd.member_id = sad.member_id
                 WHERE
                 	sd.samity_id = :samityId
@@ -68,7 +68,7 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
                 SELECT
                 	sum(amount)
                 FROM
-                	collection_staging_data csd
+                	template.collection_staging_data csd
                 WHERE
                 	csd.samity_id = :samityId;
             """)
@@ -77,12 +77,12 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
     Flux<CollectionStagingDataEntity> findAllBySamityId(String samityId);
 
     @Query("""
-                SELECT count(csd.samity_id) FROM collection_staging_data csd WHERE csd.samity_id = :samityId;
+                SELECT count(csd.samity_id) FROM template.collection_staging_data csd WHERE csd.samity_id = :samityId;
             """)
     Mono<Integer> getCountOfCollectionDataBySamityId(String samityId);
 
     @Query(("""
-                SELECT csd.staging_data_id FROM collection_staging_data csd WHERE csd.samity_id = :samityId;
+                SELECT csd.staging_data_id FROM template.collection_staging_data csd WHERE csd.samity_id = :samityId;
             """))
     Flux<String> getStagingDataIdListBySamity(String samityId);
 
@@ -98,7 +98,7 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
     Mono<CollectionStagingDataEntity> findDistinctFirstBySamityId(String samityId);
 
     @Query("""
-        SELECT DISTINCT samity_id FROM collection_staging_data csd WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
+        SELECT DISTINCT samity_id FROM template.collection_staging_data csd WHERE is_locked = 'Yes' AND locked_by = :lockedBy;
     """)
     Flux<String> getSamityIdListLockedByUserForAuthorization(String lockedBy);
 
@@ -111,12 +111,12 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
     Mono<Boolean> deleteAllByManagementProcessIdAndProcessId(String managementProcessId, String processId);
 
     @Query("""
-            SELECT * FROM collection_staging_data WHERE management_process_id = :managementProcessId and collection_type = :collectionType  AND case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end LIMIT :limit OFFSET :offset;
+            SELECT * FROM template.collection_staging_data WHERE management_process_id = :managementProcessId and collection_type = :collectionType  AND case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end LIMIT :limit OFFSET :offset;
             """)
     Flux<CollectionStagingDataEntity> findCollectionStagingDataByCollectionType(String managementProcessId, String collectionType, String fieldOfficerId, int limit, int offset);
 
     @Query("""
-            SELECT count(*) FROM collection_staging_data WHERE management_process_id = :managementProcessId and collection_type = :collectionType  AND case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end;
+            SELECT count(*) FROM template.collection_staging_data WHERE management_process_id = :managementProcessId and collection_type = :collectionType  AND case when (:fieldOfficerId is not null and :fieldOfficerId != '') then (created_by = :fieldOfficerId) else 1 = 1 end;
             """)
     Mono<Long> countStagingCollectionData(String managementProcessId, String collectionType, String fieldOfficerId);
 
@@ -127,7 +127,7 @@ public interface CollectionStagingDataRepository extends ReactiveCrudRepository<
 
     @Modifying
     @Query("""
-        UPDATE collection_staging_data 
+        UPDATE template.collection_staging_data 
         SET 
             created_by = CASE 
                 WHEN amount = 0 AND :newAmount > 0 THEN :updatedBy 

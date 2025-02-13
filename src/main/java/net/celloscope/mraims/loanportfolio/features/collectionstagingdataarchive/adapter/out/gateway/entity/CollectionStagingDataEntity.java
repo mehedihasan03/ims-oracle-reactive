@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("collection_staging_data")
+@Table("template.collection_staging_data")
 public class CollectionStagingDataEntity extends BaseToString {
 
     @Id

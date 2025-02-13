@@ -43,7 +43,7 @@ public interface IStagingProcessTrackerRepository extends ReactiveCrudRepository
                 template.staging_data sd
             WHERE
                 sd.samity_id = :samityId
-            LIMIT 1;
+            FETCH FIRST 1 ROW ONLY;
             """)
     Mono<Integer> getTotalMemberForOneSamity(String samityId);
 

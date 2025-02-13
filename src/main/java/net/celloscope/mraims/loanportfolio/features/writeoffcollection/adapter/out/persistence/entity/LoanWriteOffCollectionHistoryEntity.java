@@ -18,7 +18,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("loan_write_off_collection_history")
+@Table("template.loan_write_off_collection_history")
 public class LoanWriteOffCollectionHistoryEntity implements Persistable<String> {
 
     @Id

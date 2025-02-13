@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("sms_log")
+@Table("template.sms_log")
 public class SmsLogEntity implements Persistable<String> {
     @Id
     private String oid;

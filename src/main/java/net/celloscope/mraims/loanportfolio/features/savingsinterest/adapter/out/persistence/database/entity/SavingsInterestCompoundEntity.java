@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table("savings_interest_compound")
+@Table("template.savings_interest_compound")
 public class SavingsInterestCompoundEntity {
    @Id
    private String oid;

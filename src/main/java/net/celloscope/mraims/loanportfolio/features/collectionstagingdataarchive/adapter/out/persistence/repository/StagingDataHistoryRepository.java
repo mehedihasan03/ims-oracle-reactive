@@ -12,10 +12,10 @@ public interface StagingDataHistoryRepository extends R2dbcRepository<StagingDat
 
     @Query("""
             select sdh.*
-                from staging_data_history sdh
-                    join staging_data sd
+                from template.staging_data_history sdh
+                    join template.staging_data sd
                         on sdh.staging_data_id = sd.staging_data_id
-                    join mem_smt_off_pri_map msopm
+                    join template.mem_smt_off_pri_map msopm
                         on sd.member_id = msopm.member_id
                 where msopm.office_id = :OFFICE_ID
                 and msopm.status = 'Active';

@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("mfi_program")
+@Table("template.mfi_program")
 public class MfiProgram {
     private String oid;
     private String mfiProgramId;

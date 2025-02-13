@@ -19,7 +19,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "auto_voucher_detail_history")
+@Table(name = "template.auto_voucher_detail_history")
 public class AutoVoucherDetailHistoryEntity implements Persistable<String> {
 
     @Id

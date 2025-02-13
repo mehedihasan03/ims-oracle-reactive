@@ -16,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("service_charge_chart")
+@Table("template.service_charge_chart")
 public class ServiceChargeChartEntity implements Persistable<String> {
     @Id
     private String oid;

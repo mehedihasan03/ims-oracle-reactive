@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("samity")
+@Table("template.samity")
 public class Samity {
 
     @Id

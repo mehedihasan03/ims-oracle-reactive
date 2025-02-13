@@ -13,10 +13,10 @@ public interface HolidayRepository extends ReactiveCrudRepository<HolidayEntity,
 	Mono<HolidayEntity> findFirstByOfficeIdAndHolidayDateAfterOrderByHolidayDate(String officeId, LocalDate currentBusinessDate);
 
 	@Query("""
-			select * from holiday h
-			inner join mem_smt_off_pri_map msopm 
+			select * from template.holiday h
+			inner join template.mem_smt_off_pri_map msopm 
 			on h.office_id = msopm.office_id
-			inner join loan_account la 
+			inner join template.loan_account la 
 			on la.member_id  = msopm.member_id
 			where la.loan_account_id = :loanAccountId
 			and msopm.status = 'Active';
@@ -24,10 +24,10 @@ public interface HolidayRepository extends ReactiveCrudRepository<HolidayEntity,
 	Flux<HolidayEntity> getAllHolidaysOfASamityByLoanAccountId(String loanAccountId);
 
 	@Query("""
-			select * from holiday h
-			inner join mem_smt_off_pri_map msopm on
+			select * from template.holiday h
+			inner join template.mem_smt_off_pri_map msopm on
 			h.office_id = msopm.office_id
-			inner join savings_account sa on
+			inner join template.savings_account sa on
 			sa.member_id = msopm.member_id
 			where sa.savings_account_id = :savingsAccountId
 			and msopm.status = 'Active';

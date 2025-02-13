@@ -16,7 +16,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("calendar")
+@Table("template.calendar")
 public class CalendarEntity implements Persistable<String> {
 	
 	@Id

@@ -20,7 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Table("passbook")
+@Table("template.passbook")
 public class PassbookEntity implements Persistable<String> {
     @Id
     private String oid;

@@ -13,12 +13,12 @@ public interface WithdrawStagingDataHistoryRepository extends R2dbcRepository<Wi
 
     @Query("""
             select sdh.*
-            from staging_withdraw_data_history sdh
-            join staging_withdraw_data swd
+            from template.staging_withdraw_data_history sdh
+            join template.staging_withdraw_data swd
             on sdh.withdraw_staging_data_id = swd.withdraw_staging_data_id
-            join staging_data sd
+            join template.staging_data sd
             on sd.staging_data_id = swd.staging_data_id
-            join mem_smt_off_pri_map msopm
+            join template.mem_smt_off_pri_map msopm
             on sd.member_id = msopm.member_id
             where msopm.office_id = :OFFICE_ID
             and msopm.status = 'Active';

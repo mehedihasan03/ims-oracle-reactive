@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table("person")
+@Table("template.person")
 public class Person {
     private String oid;
     private String personId;

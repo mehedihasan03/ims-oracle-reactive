@@ -20,7 +20,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("loan_waiver_data_history")
+@Table("template.loan_waiver_data_history")
 public class LoanWaiverHistoryEntity implements Persistable<String> {
 
     @Id

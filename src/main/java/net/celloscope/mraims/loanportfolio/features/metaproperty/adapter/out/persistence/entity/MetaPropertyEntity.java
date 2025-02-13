@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("metaproperty")
+@Table("template.metaproperty")
 public class MetaPropertyEntity extends BaseToString {
 
     @Id

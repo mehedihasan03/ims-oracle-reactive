@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("savings_acc_proposal")
+@Table("template.savings_acc_proposal")
 public class SavingsAccProposal {
     private String oid;
     private String savingsApplicationId;

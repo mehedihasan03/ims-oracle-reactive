@@ -19,7 +19,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("member_attendance")
+@Table("template.member_attendance")
 public class MemberAttendanceEntity implements Persistable<String> {
 
     @Id

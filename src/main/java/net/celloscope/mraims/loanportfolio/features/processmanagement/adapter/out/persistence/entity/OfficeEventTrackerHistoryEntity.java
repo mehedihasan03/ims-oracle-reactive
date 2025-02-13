@@ -17,7 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("office_event_tracker_history")
+@Table("template.office_event_tracker_history")
 public class OfficeEventTrackerHistoryEntity implements Persistable<String> {
 
     @Id

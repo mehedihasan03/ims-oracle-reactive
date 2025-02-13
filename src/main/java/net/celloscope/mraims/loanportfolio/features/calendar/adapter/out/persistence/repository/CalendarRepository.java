@@ -15,12 +15,12 @@ public interface CalendarRepository extends ReactiveCrudRepository<CalendarEntit
 	Mono<CalendarEntity> findFirstByOfficeIdAndIsWorkingDayAndCalendarDateAfterOrderByCalendarDate(String officeId, String isWorkingDay, LocalDate calendarDate);
 
 	@Query("""
-	select distinct (calendar_date) from calendar c
+	select distinct (calendar_date) from template.calendar c
 	where calendar_date < :currentDate
 	and is_working_day = 'Yes'
 	and office_id = :officeId
 	order by calendar_date desc
-	limit 1;
+	FETCH FIRST 1 ROWS ONLY;
 	""")
 	Mono<LocalDate> getLastBusinessDateForOffice(String officeId, LocalDate currentBusinessDate);
 

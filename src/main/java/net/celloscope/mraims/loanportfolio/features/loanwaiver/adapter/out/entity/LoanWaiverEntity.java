@@ -21,7 +21,7 @@ import static java.util.Objects.isNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table("loan_waiver_data")
+@Table("template.loan_waiver_data")
 public class LoanWaiverEntity implements Persistable<String> {
 
     @Id
