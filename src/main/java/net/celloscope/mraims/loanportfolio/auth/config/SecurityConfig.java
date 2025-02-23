@@ -27,8 +27,8 @@ public class SecurityConfig {
                 .authenticationManager(authenticationManager)
                 .securityContextRepository(securityContextRepository)
                 .authorizeExchange(exchange -> exchange
-//                        .pathMatchers("/**").permitAll()
-                        .anyExchange().authenticated())
+                        .pathMatchers("/**").permitAll())
+//                        .anyExchange().authenticated())
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .build();

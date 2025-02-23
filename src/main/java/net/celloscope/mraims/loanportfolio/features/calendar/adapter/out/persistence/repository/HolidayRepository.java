@@ -14,7 +14,7 @@ public interface HolidayRepository extends ReactiveCrudRepository<HolidayEntity,
 
 	@Query("""
 			select * from template.holiday h
-			inner join template.mem_smt_off_pri_map msopm 
+			inner join template.mem_samity_map msopm 
 			on h.office_id = msopm.office_id
 			inner join template.loan_account la 
 			on la.member_id  = msopm.member_id
@@ -25,7 +25,7 @@ public interface HolidayRepository extends ReactiveCrudRepository<HolidayEntity,
 
 	@Query("""
 			select * from template.holiday h
-			inner join template.mem_smt_off_pri_map msopm on
+			inner join template.mem_samity_map msopm on
 			h.office_id = msopm.office_id
 			inner join template.savings_account sa on
 			sa.member_id = msopm.member_id

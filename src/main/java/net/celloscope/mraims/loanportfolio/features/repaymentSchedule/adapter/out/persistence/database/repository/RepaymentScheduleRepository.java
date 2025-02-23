@@ -67,7 +67,7 @@ public interface RepaymentScheduleRepository extends ReactiveCrudRepository<Repa
 	@Query("""
 		select * from template.loan_repay_schedule lrs
 		where member_id in (select member_id 
-			from template.mem_smt_off_pri_map msopm 
+			from template.mem_samity_map msopm 
 			where office_id = :officeId
 			and msopm.status = 'Active')
 		and lrs.install_date <= :installDate;

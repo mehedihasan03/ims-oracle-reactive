@@ -11,17 +11,17 @@ public interface ServiceChargeChartRepository extends ReactiveCrudRepository<Ser
     Mono<ServiceChargeChartEntity> findByLoanProductId(String loanProductId);
 
     @Query("""
-    select s.samity_day, lp.repayment_frequency, scc.service_charge_rate , scc.service_charge_rate_freq, lp.interest_calc_method from template.loan_account la
+    select s.samity_day, lp.repayment_frequency, lp.orig_service_charge_rate AS service_charge_rate , scc.service_charge_rate_freq, lp.interest_calc_method from template.loan_account la
     INNER JOIN template.loan_product lp
     ON la.loan_product_id = lp.loan_product_id
-    INNER JOIN template.mem_smt_off_pri_map msopm
-    ON la.member_id = msopm .member_id
+    INNER JOIN template.mem_samity_map msm
+    ON la.member_id = msm .member_id
     INNER JOIN template.samity s
-    ON msopm.samity_id = s.samity_id
+    ON msm.samity_id = s.samity_id
     INNER JOIN template.service_charge_chart scc
     ON la.loan_product_id = scc.loan_product_id
     WHERE la.loan_account_id  = :loanAccountId
-    AND msopm.status = 'Active';
+    AND msm.status = 'Active';
     """)
     Mono<CombinedDTO> getCombinedDTO(String loanAccountId);
 

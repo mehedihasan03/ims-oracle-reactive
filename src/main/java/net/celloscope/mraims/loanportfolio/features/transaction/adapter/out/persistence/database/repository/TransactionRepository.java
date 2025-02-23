@@ -20,7 +20,7 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 	@Query("""
 			select X.*, Y.transaction_count, Y.transaction_amount from
 			    (select s.samity_id, count(msopm.*) as total_member
-			    from template.mem_smt_off_pri_map msopm
+			    from template.mem_samity_map msopm
 				join template.samity s
 				on s.samity_id = msopm.samity_id
 			    group by s.samity_id
@@ -28,7 +28,7 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 			left join
 			    (select s.samity_id, count(t.*) as transaction_count, sum(t.amount) as transaction_amount
 			    from template."transaction" t
-				join template.mem_smt_off_pri_map msopm
+				join template.mem_samity_map msopm
 				on t.member_id = msopm.member_id
 				join template.samity s
 				on s.samity_id = msopm.samity_id
@@ -43,7 +43,7 @@ public interface TransactionRepository extends ReactiveCrudRepository<Transactio
 	@Query("""
 			select *
 			from template."transaction" t
-			join template.mem_smt_off_pri_map msopm
+			join template.mem_samity_map msopm
 			on t.member_id = msopm.member_id
 			join template.samity s
 			on s.samity_id = msopm.samity_id

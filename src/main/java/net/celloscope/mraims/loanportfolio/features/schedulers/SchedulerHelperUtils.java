@@ -44,12 +44,12 @@ public class SchedulerHelperUtils {
     public List<String> getInstituteOidList() {
         List<String> oidList = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(
-            "jdbc:postgresql://" + host + ":" + port + "/",
+            "r2dbc:oracle://172.16.6.102:1521/mraims/",
             username,
             password
         )) {
             connection.setSchema(defaultSchema);
-            String sql = "select * from institute";
+            String sql = "SELECT * FROM INSTITUTE";
             try (PreparedStatement p = connection.prepareStatement(sql); ResultSet rs = p.executeQuery()) {
                 while (rs.next()) {
                     String oid = rs.getString("oid");

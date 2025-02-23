@@ -139,7 +139,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     @Query("""
             select X.*, Y.passbook_count from
                 (select s.samity_id, count(msopm.*) as total_member
-                from template.mem_smt_off_pri_map msopm
+                from template.mem_samity_map msopm
                     join template.samity s
                         on s.samity_id = msopm.samity_id
                     WHERE msopm.status = 'Active'
@@ -147,7 +147,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
             left join
                 (select s.samity_id, count(t.*) as passbook_count
                 from template."passbook" t
-                    join template.mem_smt_off_pri_map msopm
+                    join template.mem_samity_map msopm
                         on t.member_id = msopm.member_id
                     join template.samity s
                         on s.samity_id = msopm.samity_id
@@ -161,7 +161,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     @Query("""
             select *
             from template."passbook" t 
-                join template.mem_smt_off_pri_map msopm
+                join template.mem_samity_map msopm
                     on t.member_id = msopm.member_id
                 join template.samity s
                     on s.samity_id = msopm.samity_id
@@ -188,7 +188,7 @@ public interface PassbookRepository extends ReactiveCrudRepository<PassbookEntit
     @Query("""
             select *
             from template."passbook" t
-            join template.mem_smt_off_pri_map msopm
+            join template.mem_samity_map msopm
             on t.member_id = msopm.member_id
             join template.samity s
             on s.samity_id = msopm.samity_id

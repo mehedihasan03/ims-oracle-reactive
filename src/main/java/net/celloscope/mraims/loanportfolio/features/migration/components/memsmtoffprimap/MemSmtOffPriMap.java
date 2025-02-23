@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table("template.mem_smt_off_pri_map")
+@Table("template.mem_samity_map")
 public class MemSmtOffPriMap {
     private String oid;
     private String memSmtOffPriMapId;

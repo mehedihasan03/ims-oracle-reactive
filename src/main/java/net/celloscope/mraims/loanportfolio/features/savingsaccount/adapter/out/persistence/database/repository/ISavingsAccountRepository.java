@@ -169,7 +169,7 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
     ON sp.savings_product_id = sa.savings_product_id
     INNER JOIN template."member" m
     ON sa.member_id = m.member_id
-    INNER JOIN template.mem_smt_off_pri_map msopm
+    INNER JOIN template.mem_samity_map msopm
     ON m.member_id = msopm.member_id
     INNER JOIN template.samity s
     ON msopm.samity_id = s.samity_id
@@ -199,7 +199,7 @@ public interface ISavingsAccountRepository extends ReactiveCrudRepository<Saving
     ON sp.savings_product_id = sa.savings_product_id
     INNER JOIN template."member" m
     ON sa.member_id = m.member_id
-    INNER JOIN template.mem_smt_off_pri_map msopm
+    INNER JOIN template.mem_samity_map msopm
     ON m.member_id = msopm.member_id
     INNER JOIN template.samity s
     ON msopm.samity_id = s.samity_id

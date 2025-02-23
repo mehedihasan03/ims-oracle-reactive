@@ -31,7 +31,7 @@ public class IdleConnectionKillerScheduler {
             return;
         }
         try (Connection connection = DriverManager.getConnection(
-            "jdbc:postgresql://" + host + ":" + port + "/",
+            "r2dbc:oracle://172.16.6.102:1521/mraims/",
             username,
             password
         )) {

@@ -14,7 +14,7 @@ public interface StagingDataArchiveRepository extends R2dbcRepository<StagingDat
     @Query("""
             select sd.*
             from template.staging_data sd
-            join template.mem_smt_off_pri_map msopm
+            join template.mem_samity_map msopm
             on sd.member_id = msopm.member_id
             where msopm.office_id = :OFFICE_ID
             and msopm.status = 'Active';

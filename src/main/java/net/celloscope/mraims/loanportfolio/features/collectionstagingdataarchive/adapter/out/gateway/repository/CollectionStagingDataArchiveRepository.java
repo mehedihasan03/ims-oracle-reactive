@@ -14,7 +14,7 @@ public interface CollectionStagingDataArchiveRepository extends R2dbcRepository<
     @Query("""
             select csd.*
             from template.collection_staging_data csd
-            join template.mem_smt_off_pri_map msopm
+            join template.mem_samity_map msopm
             on csd.samity_id = msopm.samity_id
             where msopm.office_id  = :OFFICE_ID
             and msopm.status = 'Active';

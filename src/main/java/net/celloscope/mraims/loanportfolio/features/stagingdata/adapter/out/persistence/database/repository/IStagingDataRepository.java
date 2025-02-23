@@ -21,7 +21,7 @@ public interface IStagingDataRepository extends ReactiveCrudRepository<StagingDa
 				m.mfi_id,
 				m.*,
 			FROM template."member" m
-			INNER JOIN template.mem_smt_off_pri_map msopm 
+			INNER JOIN template.mem_samity_map msopm 
 			ON msopm.member_id = m.member_id
 			WHERE msopm.samity_id = :samityId
 			AND msopm.status = 'Active';

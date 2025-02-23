@@ -31,7 +31,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
                 e.emp_name_bn AS field_officer_name_bn
             FROM
                 template.samity s
-            INNER JOIN template.mem_smt_off_pri_map msopm ON
+            INNER JOIN template.mem_samity_map msopm ON
                 s.samity_id = msopm.samity_id
             INNER JOIN template.employee e ON
                 s.field_officer_id = e.employee_id
@@ -58,7 +58,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             select m.member_id, m.member_name_en , m.member_name_bn, msopm.office_id,
                 		m.mobile, m.register_book_serial_id , m.gender , m.marital_status , m.father_name_en , m.father_name_bn , m.spouse_name_en , m.spouse_name_bn,
                         m.res_address_line_1 as res_address, m.per_address_line_1 as per_address
-            from template."member" m inner join template.mem_smt_off_pri_map msopm
+            from template."member" m inner join template.mem_samity_map msopm
             on m.member_id = msopm.member_id
             WHERE m.member_id = :memberId
             AND msopm.status = 'Active';
@@ -69,7 +69,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             select m.*, msopm.office_id from template.loan_account la
             INNER JOIN template."member" m
             ON la.member_id = m.member_id
-            inner join template.mem_smt_off_pri_map msopm
+            inner join template.mem_samity_map msopm
             on la.member_id = msopm.member_id
             WHERE la.loan_account_id = :loanAccountId
             AND msopm.status = 'Active';
@@ -80,7 +80,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             select m.*, msopm.office_id from template.savings_account sa
             INNER JOIN template."member" m
             ON sa.member_id = m.member_id
-            inner join template.mem_smt_off_pri_map msopm
+            inner join template.mem_samity_map msopm
             on sa.member_id = msopm.member_id
             WHERE sa.savings_account_id = :savingsAccountId
             and msopm.status = 'Active';
@@ -221,7 +221,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
 
     @Query("""
             select msopm.office_id  from template."member" m
-            inner join template.mem_smt_off_pri_map msopm
+            inner join template.mem_samity_map msopm
             on m.member_id = msopm.member_id
             where m.member_id = :memberId
             and msopm.status = 'Active';
@@ -241,7 +241,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
     @Query("""
             	SELECT la.loan_account_id FROM template.loan_account la WHERE la.member_id IN (
                     SELECT DISTINCT msopm.member_id 
-                    FROM template.mem_smt_off_pri_map msopm 
+                    FROM template.mem_samity_map msopm 
                     WHERE msopm.samity_id = :samityId 
                     AND msopm.status = 'Active'
                     ORDER BY msopm.member_id) 
@@ -255,7 +255,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
               WHERE csd.management_process_id = :managementProcessId 
               AND csd.samity_id IN 
                 (SELECT DISTINCT msopm.samity_id 
-                FROM template.mem_smt_off_pri_map msopm 
+                FROM template.mem_samity_map msopm 
                 WHERE msopm.office_id = :officeId
                 AND msopm.status = 'Active' 
                 ORDER BY msopm.samity_id);
@@ -268,7 +268,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             	WHERE swd.management_process_id = :managementProcessId 
             	AND swd.samity_id IN 
             	    (SELECT DISTINCT msopm.samity_id 
-            	    FROM template.mem_smt_off_pri_map msopm 
+            	    FROM template.mem_samity_map msopm 
             	    WHERE msopm.office_id = :officeId 
             	    AND msopm.status = 'Active'
             	    ORDER BY msopm.samity_id);
@@ -347,7 +347,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
 
     @Query("""
             SELECT count(msopm.member_id) 
-            FROM template.mem_smt_off_pri_map msopm 
+            FROM template.mem_samity_map msopm 
             WHERE msopm.samity_id = :samityId
             AND msopm.status = 'Active';
             """)
@@ -358,7 +358,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             FROM template.loan_account la 
             WHERE la.member_id IN 
                 (SELECT msopm.member_id 
-                FROM template.mem_smt_off_pri_map msopm 
+                FROM template.mem_samity_map msopm 
                 WHERE msopm.samity_id = :samityId
                 AND msopm.status = 'Active') 
             AND la.status = 'Active';
@@ -370,7 +370,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
             FROM template.savings_account sa 
             WHERE sa.member_id IN 
                 (SELECT msopm.member_id 
-                FROM template.mem_smt_off_pri_map msopm 
+                FROM template.mem_samity_map msopm 
                 WHERE msopm.samity_id = :samityId
                 AND msopm.status = 'Active');
             """)
@@ -378,7 +378,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
 
     @Query("""
             SELECT msopm.member_id 
-            FROM template.mem_smt_off_pri_map msopm 
+            FROM template.mem_samity_map msopm 
             WHERE msopm.samity_id = :samityId
             AND msopm.status = 'Active';
             """)
@@ -512,7 +512,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
 
     @Query("""
             select * from template.member m 
-            inner join template.mem_smt_off_pri_map msopm 
+            inner join template.mem_samity_map msopm 
             on m.member_id = msopm.member_id  
             inner join template.office o 
             on msopm.office_id = o.office_id 
@@ -540,7 +540,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
     from template.management_process_tracker mpt 
     where mpt.office_id in 
         (select msopm.office_id 
-        from template.mem_smt_off_pri_map msopm 
+        from template.mem_samity_map msopm 
         inner join template.loan_account la 
         on msopm.member_id = la.member_id 
         where la.loan_account_id = :loanAccountId
@@ -558,7 +558,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
     @Query("""
     select * from 
     template.member m inner join 
-    template.mem_smt_off_pri_map msopm 
+    template.mem_samity_map msopm 
     on msopm.member_id =m.member_id 
     where msopm.office_id = :officeId
     and msopm.status = 'Active';
@@ -567,7 +567,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
 
     @Query("""
     select * from template.samity s 
-    inner join template.mem_smt_off_pri_map msopm 
+    inner join template.mem_samity_map msopm 
     on s.samity_id = msopm.samity_id 
     where msopm.member_id =:memberId
     and msopm.status = 'Active';
@@ -576,7 +576,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
 
     @Query("""
     SELECT s.samity_id, o.office_id, mpt.management_process_id
-    FROM template.mem_smt_off_pri_map msopm
+    FROM template.mem_samity_map msopm
     INNER JOIN template.office o ON o.office_id = msopm.office_id
     INNER JOIN template.samity s ON s.samity_id = msopm.samity_id
     INNER JOIN template.savings_account sa ON sa.member_id = msopm.member_id
@@ -598,7 +598,7 @@ public interface CommonRepository extends ReactiveCrudRepository<StagingAccountD
     @Query("""
     SELECT o.office_id, lp.loan_type_id, lp.monthly_repay_day, s.samity_day, s.samity_id, la.status as loan_account_status
     FROM template.loan_account la
-    INNER JOIN template.mem_smt_off_pri_map msopm ON la.member_id = msopm.member_id
+    INNER JOIN template.mem_samity_map msopm ON la.member_id = msopm.member_id
     INNER JOIN template.office o ON o.office_id = msopm.office_id
     INNER join template.samity s ON s.samity_id = msopm.samity_id
     INNER JOIN template.loan_product lp ON la.loan_product_id = lp.loan_product_id
